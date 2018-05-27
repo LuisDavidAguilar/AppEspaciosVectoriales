@@ -1,5 +1,5 @@
 #include "Matriz.h"
-
+#include <sstream>
 
 using namespace std;
 
@@ -13,6 +13,14 @@ Matriz::Matriz() {
 }
 
 //Matriz::Matriz(int rows, int cols, Vector *vectores) : rows(rows), cols(cols), vectores(vectores) {}
+
+Matriz::Matriz(Matriz &matrizCopy) : rows(matrizCopy.rows), cols(matrizCopy.cols), vectores(new RVector[matrizCopy.rows])
+{
+	for (int i = 0; i < rows; i++)
+	{
+		*(vectores + i) = *(matrizCopy.vectores + i);
+	}
+}
 
 Matriz::Matriz(int rows, int cols) : rows(rows), cols(cols), vectores(new RVector[rows]) {}
 
@@ -48,14 +56,25 @@ void Matriz::Fill(const RVector &vector_source) {
 		row_index++;
 }
 
+RVector & Matriz::operator[](int nSubindex)
+{
+	
+
+	if (nSubindex >= 0 && nSubindex < rows)
+		return *(vectores + nSubindex);
+	else {
+		//return iErr;
+	}
+}
+
 Matriz operator*(const Matriz &A, const Matriz &B) {
 	Matriz C;
 	RVector c_Vector;
 	if (A.cols == B.rows) {
 		C = Matriz(A.rows, B.cols);
-		int *v = nullptr;
+		double *v = nullptr;
 		for (int i = 0; i < C.rows; ++i) {
-			v = new int[B.cols];
+			v = new double[B.cols];
 			for (int j = 0; j < C.cols; ++j) {
 				*(v + j) = 0;
 				for (int k = 0; k < A.cols; ++k) {
@@ -69,6 +88,17 @@ Matriz operator*(const Matriz &A, const Matriz &B) {
 		}
 	}
 	return C;
+}
+
+string Matriz::DisplayMatriz()
+{
+	stringstream ss;
+	for (int i = 0; i < rows; i++)
+	{
+		ss << vectores[i].Display();
+		ss << endl;
+	}
+	return ss.str();
 }
 
 void Matriz::Clear() {

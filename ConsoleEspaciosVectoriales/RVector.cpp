@@ -1,5 +1,6 @@
 #include "RVector.h"
 #include <sstream>
+#include <iomanip>
 
 using namespace std;
 
@@ -9,14 +10,13 @@ using namespace std;
 RVector::RVector()
 {
 	size = 0;
-	components = new int[size];
+	components = new double[size];
 }
 
-RVector::RVector(int s, int *vector_source)
+RVector::RVector(int s, double *vector_source)
 {
 	size = s;
-	size = s;
-	components = new int[size];
+	components = new double[size];
 	for (int i = 0; i < size; ++i) {
 		*(components + i) = *(vector_source + i);
 	}
@@ -25,9 +25,9 @@ RVector::RVector(int s, int *vector_source)
 RVector::RVector(const std::vector<std::string> &vector_source)
 {
 	size = vector_source.size();
-	components = new int[size];
+	components = new double[size];
 	for (int i = 0; i < size; ++i) {
-		*(components + i) = stoi(vector_source[i]);
+		*(components + i) = stod(vector_source[i]);
 	}
 }
 
@@ -51,7 +51,7 @@ void RVector::setSize(int size)
 	RVector::size = size;
 }
 
-int * RVector::getComponents() const
+double * RVector::getComponents() const
 {
 	return components;
 }
@@ -61,9 +61,21 @@ int * RVector::getComponents() const
 
 #pragma region Metodos
 
-int operator*(RVector &v, RVector &w)
+double& RVector::operator[](int nSubindex)
 {
-	int producto_punto, i;
+	static double iErr = -1;
+
+	if (nSubindex >= 0 && nSubindex < size)
+		return *(components + nSubindex);
+	else {
+		return iErr;
+	}
+}
+
+double operator*(RVector &v, RVector &w)
+{
+	double producto_punto;
+	int i;
 	producto_punto = 0; i = 0;
 	if (v.size > w.size) {
 		while (i != w.size) {
@@ -96,7 +108,7 @@ int operator*(RVector &v, RVector &w)
 
 RVector RVector::operator*(int alfa)
 {
-	int *vector = new int[size];
+	double *vector = new double[size];
 	for (int i = 0; i < size; ++i) {
 		*(vector + i) = *(components + i) * alfa;
 	}
@@ -109,11 +121,14 @@ string RVector::Display() const
 	ss << "< ";
 	for (int i = 0; i < size; i++)
 	{
-		ss << *(components + i) << " ";
+		ss << std::left << std::setw(6) << std::setfill(' ');
+		ss << setprecision(2) << fixed << *(components + i) << " ";
 	}
-	ss << " >";
+	ss << ">";
 	return ss.str();
 }
+
+
 
 void RVector::Clear()
 {

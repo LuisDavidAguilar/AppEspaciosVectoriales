@@ -146,15 +146,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GaussJordan.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Matriz.cpp" />
     <ClCompile Include="RVector.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GaussJordan.h" />
     <ClInclude Include="Matriz.h" />
     <ClInclude Include="RVector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
-  <ImportGroup Label="ExtensionTargets">
-  </ImportGroup>
+  <ImportGroup Label="ExtensionTargets" />
 </Project>

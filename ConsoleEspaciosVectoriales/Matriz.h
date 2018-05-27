@@ -1,5 +1,6 @@
 #pragma once
 #include "RVector.h"
+#include <string>
 
 class Matriz
 {
@@ -15,6 +16,8 @@ public:
 	Matriz();
 
 	//Matriz(int rows, int cols, Vector *vectores);
+
+	Matriz(Matriz&);
 
 	Matriz(int rows, int cols);
 
@@ -32,7 +35,9 @@ public:
 
 	//<editor-fold desc="MetodosMatriz">
 	void Fill(const RVector&);
+	RVector& operator[](int);
 	friend Matriz operator*(const Matriz&, const Matriz&);
+	std::string DisplayMatriz();
 	void Clear();
 	bool Empty();
 	//</editor-fold>

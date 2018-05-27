@@ -24,12 +24,18 @@
     <ClCompile Include="Matriz.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
+    <ClCompile Include="GaussJordan.cpp">
+      <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RVector.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="Matriz.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="GaussJordan.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
