@@ -19,7 +19,7 @@ Matriz GaussJordan::EscalonarMatriz(Matriz &matriz)
 {
 	Matriz A = Matriz(matriz);
 	pivote = 0;
-	while (pivote < A.getRows())
+	while (pivote < A.getRows() && pivote < A.getCols())
 	{
 		if (A[pivote][pivote] != 0)
 		{
